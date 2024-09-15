@@ -1,76 +1,14 @@
 text {
-    font-family: System-Bold;
-    font-weight: bold;
+    fill: #cdc1b4;
     text-anchor: middle;
     text-length: 4;
+    font-family: System-Bold;
+    font-size: 40;
+    font-weight: bold;
 }
 
-.x0 {
-    fill: white;
-    font-size: 60;
-}
-
-.x2 {
-    fill: #eee4da;
-    font-size: 60;
-}
-
-.x4 {
-    fill: #ece0ca;
-    font-size: 60;
-}
-
-.x8 {
-    fill: #f4b17a;
-    font-size: 60;
-}
-
-.x16{
-    fill: #f59575;
-    font-size: 45;
-}
-
-.x32{
-    fill: #f57c5f;
-    font-size: 45;
-}
-
-.x64{
-    fill: #f65d3b;
-    font-size: 45;
-}
-
-.x128{
-    fill: #edce71;
-    font-size: 30;
-}
-
-.x256{
-    fill: #edcc63;
-    font-size: 30;
-}
-
-.x512{
-    fill: #edc651;
-    font-size: 30;
-}
-
-.x1024{
-    fill: #eec744;
-    font-size: 20;
-}
-
-.x2048{
-    fill: #ecc230;
-    font-size: 20;
-}
-
-.x4096 {
-    fill: #fe3d3d;
-    font-size: 20;
-}
-
-.x8192 {
-    fill: #ff2020;
-    font-size: 20;
+rect {
+    width: 20%;
+    height: 20%;
+    fill: #cdc1b4;
 }
