@@ -1,8 +1,9 @@
 import { getElementById } from "document";
-import { SwipeDetector, GestureType, GestureDirection } from "fitbit-gestures";
 
 
 let score = 0;
+let xInit;
+let yInit;
 const board = [
 	[0, 0, 0, 0],
 	[0, 0, 0, 0],
@@ -10,16 +11,24 @@ const board = [
 	[0, 0, 0, 0]];
 const rows = 4;
 const columns = 4;
-const swipeConfig = { threshold: 10 };
-const swipe = new SwipeDetector("board", onGesture.bind(this), swipeConfig);
+let boardElement = getElementById("board");
 
 
 setTwo();
 setTwo();
 
 
-function onGesture(event) {
-    if (event.type === GestureType.Swipe && event.dir === GestureDirection.Up) {
+boardElement.onmousedown = function (event) {
+	xInit = event.screenX;
+	yInit = event.screenY;
+}
+
+boardElement.onmouseup = function (event) {
+	let xDelta = event.screenX - xInit;
+	let yDelta = event.screenY - yInit;
+	let angle = Math.atan2(yDelta, xDelta) // range (-PI, PI] incl. PI
+	console.log(angle)
+	if (angle >= -3*Math.PI/4 && angle < -Math.PI/4) {
         console.log('Up');
         for (let r = 0; r < rows; r++) {
             let row = board[r];
@@ -32,9 +41,9 @@ function onGesture(event) {
                 updateTile(tile, text, num);
             }
         }
-	    setTwo();
-    } else if (event.type === GestureType.Swipe && event.dir === GestureDirection.Down) {
-	  	console.log('Down');
+	    setTwo();		
+	} else if (angle >= Math.PI/4 && angle < 3*Math.PI/4) {
+		console.log('Down');
 		for (let r = 0; r < rows; r++) {
 			let row = board[r]; // [0, 2, 2, 2]
 			row.reverse(); // [2, 2, 2, 0]
@@ -47,8 +56,8 @@ function onGesture(event) {
 				updateTile(tile, text, num);
 			}
 		}
-		setTwo();
-	} else if (event.type === GestureType.Swipe && event.dir === GestureDirection.Left) {
+		setTwo();		
+	} else if (angle >= 3*Math.PI/4 || angle < -3*Math.PI/4) {
 		console.log('Left');
 		for (let c = 0; c < columns; c++) {
 			let row = [board[0][c], board[1][c], board[2][c], board[3][c]];
@@ -65,8 +74,8 @@ function onGesture(event) {
 				updateTile(tile, text, num);
 			}
 		}
-		setTwo();
-	} else if (event.type === GestureType.Swipe && event.dir === GestureDirection.Right) {
+		setTwo();		
+	} else if (angle >= -Math.PI/4 && angle < Math.PI/4) {
 		console.log('Right');
 		for (let c = 0; c < columns; c++) {
 			let row = [board[0][c], board[1][c], board[2][c], board[3][c]];
@@ -85,11 +94,10 @@ function onGesture(event) {
 				updateTile(tile, text, num);
 			}
 	 	}
-	  	setTwo();
+	  	setTwo();		
 	}
 	getElementById('score').text = 'SCORE: ' + score;
 }
-
 
 function slide(row) {
 	// create new array of all nums != 0
