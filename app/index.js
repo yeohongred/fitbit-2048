@@ -26,8 +26,8 @@ boardElement.onmousedown = function (event) {
 boardElement.onmouseup = function (event) {
 	let xDelta = event.screenX - xInit;
 	let yDelta = event.screenY - yInit;
-	let angle = Math.atan2(yDelta, xDelta) // range (-PI, PI] incl. PI
-	console.log(angle)
+	let angle = Math.atan2(yDelta, xDelta); // range (-PI, PI] incl. PI
+	const boardInit = JSON.parse(JSON.stringify(board))
 	if (angle >= -3*Math.PI/4 && angle < -Math.PI/4) {
         console.log('Up');
         for (let r = 0; r < rows; r++) {
@@ -40,8 +40,7 @@ boardElement.onmouseup = function (event) {
                 const num = board[r][c];
                 updateTile(tile, text, num);
             }
-        }
-	    setTwo();		
+        }		
 	} else if (angle >= Math.PI/4 && angle < 3*Math.PI/4) {
 		console.log('Down');
 		for (let r = 0; r < rows; r++) {
@@ -55,8 +54,7 @@ boardElement.onmouseup = function (event) {
                 const num = board[r][c];
 				updateTile(tile, text, num);
 			}
-		}
-		setTwo();		
+		}		
 	} else if (angle >= 3*Math.PI/4 || angle < -3*Math.PI/4) {
 		console.log('Left');
 		for (let c = 0; c < columns; c++) {
@@ -73,8 +71,7 @@ boardElement.onmouseup = function (event) {
                 const num = board[r][c];
 				updateTile(tile, text, num);
 			}
-		}
-		setTwo();		
+		}		
 	} else if (angle >= -Math.PI/4 && angle < Math.PI/4) {
 		console.log('Right');
 		for (let c = 0; c < columns; c++) {
@@ -93,8 +90,10 @@ boardElement.onmouseup = function (event) {
                 const num = board[r][c];
 				updateTile(tile, text, num);
 			}
-	 	}
-	  	setTwo();		
+	 	}		
+	}
+	if (JSON.stringify(board) !== JSON.stringify(boardInit)) {
+		setTwo();
 	}
 	getElementById('score').text = 'SCORE: ' + score;
 }
@@ -200,9 +199,6 @@ function updateTile(tile, text, num) {
 
 
 function setTwo() {
-	if (!hasEmptyTile()) {
-		return;
-	}
 	let found = false;
 	while (!found) {
 		// find random row and column to place a 2 in
@@ -217,16 +213,4 @@ function setTwo() {
 			found = true;
 		}
 	}
-}
-
-
-function hasEmptyTile() {
-	for (let r = 0; r < rows; r++) {
-		 for (let c = 0; c < columns; c++) {
-		  if (board[r][c] === 0) { // at least one zero in the board
-			  return true
-		  }
-	  }
-  }
-	return false
 }
