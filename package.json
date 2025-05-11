@@ -7,9 +7,6 @@
     "@fitbit/sdk": "~6.2.0-pre.1",
     "@fitbit/sdk-cli": "~1.8.0-pre.10"
   },
-  "dependencies": {
-    "fitbit-gestures": "^1.0.2"
-  },
   "fitbit": {
     "appUUID": "24692263-8b0d-4b50-a4d1-9a61690f1a1a",
     "appType": "app",
