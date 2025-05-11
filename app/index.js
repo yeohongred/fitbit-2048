@@ -12,6 +12,8 @@ const board = [
 const rows = 4;
 const columns = 4;
 let boardElement = getElementById("board");
+let gameOver = getElementById("game-over");
+let gameOverText = getElementById("game-over-text");
 
 
 setTwo();
@@ -92,11 +94,44 @@ boardElement.onmouseup = function (event) {
 			}
 	 	}		
 	}
+
 	if (JSON.stringify(board) !== JSON.stringify(boardInit)) {
 		setTwo();
 	}
+	
 	getElementById('score').text = 'SCORE: ' + score;
+	if (isGameOver(board)) {
+		console.log("Game Over!");
+		gameOver.style.display = "inline";
+		gameOverText.layer = 2;
+	}
 }
+
+
+function isGameOver(board) {
+	if (!hasEmptyTile()) {
+		for (let r = 0; r < rows; r++) {
+            let row = board[r];
+			for (let c = 1; c < columns; c++) {
+				if (row[c] === row[c-1]) {
+					return false;
+				}
+			}
+		}
+		for (let c = 0; c < columns; c++) {
+            let column = [board[0][c], board[1][c], board[2][c], board[3][c]];
+			for (let r = 1; r < rows; r++) {
+				if (column[r] === column[r-1]) {
+					return false;
+				}
+			}
+		}
+		return true;
+	} else {
+		return false;
+	}
+}
+
 
 function slide(row) {
 	// create new array of all nums != 0
@@ -199,6 +234,10 @@ function updateTile(tile, text, num) {
 
 
 function setTwo() {
+	if (!hasEmptyTile()) {
+		return;
+	}
+
 	let found = false;
 	while (!found) {
 		// find random row and column to place a 2 in
@@ -213,4 +252,15 @@ function setTwo() {
 			found = true;
 		}
 	}
+}
+
+function hasEmptyTile() {
+	for (let r = 0; r < rows; r++) {
+		for (let c = 0; c < columns; c++) {
+			if (board[r][c] === 0) { // at least one zero in the board
+				return true
+			}
+		}
+	}
+	return false
 }
