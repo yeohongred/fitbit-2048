@@ -1,4 +1,4 @@
-import { getElementById } from "document";
+import document from "document";
 
 
 let score = 0;
@@ -11,9 +11,10 @@ const board = [
 	[0, 0, 0, 0]];
 const rows = 4;
 const columns = 4;
-let boardElement = getElementById("board");
-let gameOver = getElementById("game-over");
-let gameOverText = getElementById("game-over-text");
+let boardElement = document.getElementById("board") as ContainerElement;
+let gameOver = document.getElementById("game-over") as RectElement;
+let gameOverText = document.getElementById("game-over-text") as TextElement;
+let scoreElement = document.getElementById('score') as TextElement;
 
 
 setTwo();
@@ -37,8 +38,8 @@ boardElement.onmouseup = function (event) {
             row = slide(row);
             board[r] = row;
             for (let c = 0; c < columns; c++) {
-                const tile = getElementById('tile-' + r.toString() + '-' + c.toString());
-				const text = getElementById('text-' + r.toString() + '-' + c.toString());
+                const tile = document.getElementById('tile-' + r.toString() + '-' + c.toString());
+				const text = document.getElementById('text-' + r.toString() + '-' + c.toString());
                 const num = board[r][c];
                 updateTile(tile, text, num);
             }
@@ -51,8 +52,8 @@ boardElement.onmouseup = function (event) {
 			row = slide(row); // [4, 2, 0, 0]
 			board[r] = row.reverse(); // [0, 0, 2, 4]
 			for (let c = 0; c < columns; c++) {
-				const tile = getElementById('tile-' + r.toString() + '-' + c.toString());
-				const text = getElementById('text-' + r.toString() + '-' + c.toString());
+				const tile = document.getElementById('tile-' + r.toString() + '-' + c.toString());
+				const text = document.getElementById('text-' + r.toString() + '-' + c.toString());
                 const num = board[r][c];
 				updateTile(tile, text, num);
 			}
@@ -68,8 +69,8 @@ boardElement.onmouseup = function (event) {
 			// board[3][c] = row[3];
 			for (let r = 0; r < rows; r++) {
 				board[r][c] = row[r];
-				const tile = getElementById('tile-' + r.toString() + '-' + c.toString());
-				const text = getElementById('text-' + r.toString() + '-' + c.toString());
+				const tile = document.getElementById('tile-' + r.toString() + '-' + c.toString());
+				const text = document.getElementById('text-' + r.toString() + '-' + c.toString());
                 const num = board[r][c];
 				updateTile(tile, text, num);
 			}
@@ -87,8 +88,8 @@ boardElement.onmouseup = function (event) {
 			// board[3][c] = row[3];
 			for (let r = 0; r < rows; r++) {
 				board[r][c] = row[r];
-				const tile = getElementById('tile-' + r.toString() + '-' + c.toString());
-				const text = getElementById('text-' + r.toString() + '-' + c.toString());
+				const tile = document.getElementById('tile-' + r.toString() + '-' + c.toString());
+				const text = document.getElementById('text-' + r.toString() + '-' + c.toString());
                 const num = board[r][c];
 				updateTile(tile, text, num);
 			}
@@ -99,7 +100,7 @@ boardElement.onmouseup = function (event) {
 		setTwo();
 	}
 	
-	getElementById('score').text = 'SCORE: ' + score;
+	scoreElement.text = 'SCORE: ' + score;
 	if (isGameOver(board)) {
 		console.log("Game Over!");
 		gameOver.style.display = "inline";
@@ -245,8 +246,8 @@ function setTwo() {
 		const c = Math.floor(Math.random() * columns);
 		if (board[r][c] === 0) {
 			board[r][c] = 2;
-			const tile = getElementById('tile-' + r.toString() + '-' + c.toString());
-			const text = getElementById('text-' + r.toString() + '-' + c.toString());
+			const tile = document.getElementById('tile-' + r.toString() + '-' + c.toString());
+			const text = document.getElementById('text-' + r.toString() + '-' + c.toString());
 			const num = board[r][c];
 			updateTile(tile, text, num);
 			found = true;
