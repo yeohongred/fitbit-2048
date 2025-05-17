@@ -1,14 +1,14 @@
 text {
-    fill: #cdc1b4;
-    text-anchor: middle;
-    text-length: 4;
-    font-family: System-Bold;
-    font-size: 40;
-    font-weight: bold;
+  fill: #cdc1b4;
+  text-anchor: middle;
+  text-length: 4;
+  font-family: System-Bold;
+  font-size: 40;
+  font-weight: bold;
 }
 
 rect {
-    width: 20%;
-    height: 20%;
-    fill: #cdc1b4;
+  width: 20%;
+  height: 20%;
+  fill: #cdc1b4;
 }
